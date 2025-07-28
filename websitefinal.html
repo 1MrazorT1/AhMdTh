@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RealStudy - Plateforme Éducative</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --danger: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 100%;
+            -webkit-text-size-adjust: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fbfd;
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 0;
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            color: white;
+            min-width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+            white-space: nowrap;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            width: 100%;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            min-width: min-content;
+        }
+
+        .nav-item {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 1.2rem 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+
+        main {
+            padding: 3rem 0;
+            flex: 1;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        .subject-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+            width: 100%;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .subject-card h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .subject-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
+
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .material-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 1.8rem;
+            transition: var(--transition);
+            border-top: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .material-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .material-card:hover::before {
+            opacity: 1;
+        }
+
+        .material-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .material-card.lesson {
+            border-top-color: var(--accent);
+        }
+
+        .material-card h3 {
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .material-card p {
+            color: var(--gray);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .material-card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .material-card .badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.active {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .action-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .login-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 3rem;
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border-left: 4px solid var(--primary);
+            width: 100%;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            width: 100%;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #f9fbfd;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+            background-color: white;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .login-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .error-message {
+            color: var(--danger);
+            background-color: #f8d7da;
+            padding: 0.9rem;
+            border-radius: var(--border-radius);
+            margin-top: 1.5rem;
+            display: none;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        footer {
+            background: var(--gradient);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: auto;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .footer-info {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-info i {
+            margin-right: 0.5rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .login-prompt {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--gray);
+            font-size: 1rem;
+            border: 1px dashed var(--light-gray);
+            width: 100%;
+        }
+
+        /* Styles optimisés pour le mode plein écran */
+        .lesson-fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+            z-index: 10000;
+            overflow: auto;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lesson-fullscreen-content {
+            width: 100%;
+            min-height: 100%;
+            padding: 5rem 6rem;
+            overflow-y: auto;
+        }
+
+        .lesson-content-container {
+            width: 100%;
+            height:100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        .lesson-content {
+            font-size: 1.5rem;
+            line-height: 100%;
+            width: 100%;
+            max-width: 100%;
+            color: #333;
+        }
+
+        .lesson-content h1 {
+            font-size: 4rem !important;
+            margin: 3.5rem 0 2.5rem !important;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .lesson-content h2 {
+            font-size: 3.2rem !important;
+            margin: 3rem 0 2rem !important;
+            color: var(--secondary);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .lesson-content h3 {
+            font-size: 2.5rem !important;
+            margin: 2.5rem 0 1.8rem !important;
+            color: var(--accent);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .lesson-content p {
+            font-size: 1.5rem !important;
+            margin-bottom: 2.2rem !important;
+            line-height: 1.9;
+        }
+
+        .lesson-content ul, 
+        .lesson-content ol {
+            font-size: 1.4rem;
+            margin-bottom: 2.2rem;
+            padding-left: 3.5rem;
+        }
+
+        .lesson-content li {
+            margin-bottom: 1.3rem;
+            line-height: 100%;
+        }
+
+        .lesson-content pre {
+            font-size: 1.3rem !important;
+            padding: 3rem !important;
+            margin: 3rem 0 !important;
+            border-radius: var(--border-radius);
+            background-color: #f8f9fa;
+            overflow-x: auto;
+            line-height: 100%;
+        }
+
+        .lesson-content code {
+            font-size: 1.3rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        .lesson-content table {
+            font-size: 1.3rem !important;
+            margin: 3.5rem 0 !important;
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            box-shadow: var(--box-shadow);
+        }
+
+        .lesson-content th, 
+        .lesson-content td {
+            padding: 1.8rem !important;
+            border: 1px solid var(--light-gray);
+        }
+
+        .lesson-content th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .lesson-content tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .lesson-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 3rem auto;
+            display: block;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .lesson-content blockquote {
+            border-left: 5px solid var(--accent);
+            background-color: #f8f9fa;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            font-style: italic;
+            font-size: 1.4rem;
+            color: var(--dark);
+        }
+
+        .close-lesson-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 10001;
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .close-lesson-btn:hover {
+            transform: scale(1.1);
+            background-color: #e63946;
+        }
+
+        /* Suppression des éléments superflus en mode plein écran */
+        .lesson-fullscreen header,
+        .lesson-fullscreen nav,
+        .lesson-fullscreen footer,
+        .lesson-fullscreen .container {
+            display: none !important;
+        }
+
+        /* Adaptations responsive */
+        @media (max-width: 1600px) {
+            .lesson-content-container {
+                max-width: 1400px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .lesson-fullscreen-content {
+                padding: 4rem 5rem;
+            }
+            
+            .lesson-content h1 {
+                font-size: 3.5rem !important;
+            }
+            
+            .lesson-content h2 {
+                font-size: 2.8rem !important;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .lesson-fullscreen-content {
+                padding: 3rem 4rem;
+            }
+            
+            .lesson-content {
+                font-size: 1.4rem;
+                line-height: 2.0;
+            }
+            
+            .lesson-content h1 {
+                font-size: 3rem !important;
+            }
+            
+            .lesson-content h2 {
+                font-size: 2.5rem !important;
+            }
+            
+            .lesson-content h3 {
+                font-size: 2.2rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .lesson-fullscreen-content {
+                padding: 2.5rem 3rem;
+            }
+            
+            .lesson-content {
+                font-size: 1.3rem;
+                line-height: 1.9;
+            }
+            
+            .lesson-content h1 {
+                font-size: 2.6rem !important;
+            }
+            
+            .lesson-content h2 {
+                font-size: 2.2rem !important;
+            }
+            
+            .lesson-content h3 {
+                font-size: 1.9rem !important;
+            }
+            
+            .close-lesson-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                top: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .lesson-fullscreen-content {
+                padding: 2rem;
+            }
+            
+            .lesson-content {
+                font-size: 1.2rem;
+                line-height: 1.8;
+            }
+            
+            .lesson-content h1 {
+                font-size: 2.2rem !important;
+            }
+            
+            .lesson-content h2 {
+                font-size: 1.9rem !important;
+            }
+            
+            .lesson-content h3 {
+                font-size: 1.6rem !important;
+            }
+            
+            .lesson-content ul,
+            .lesson-content ol {
+                padding-left: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h1>RealStudy</h1>
+            </div>
+            <div id="userInfo" class="user-info hidden">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span id="displayUsername"></span>
+                <span class="badge" id="userRoleBadge">Role</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Déconnexion
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-section="home">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="math">Mathématiques</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="informatique">Informatique</a>
+                </li>
+                <li class="nav-item" id="adminNavItem" style="display: none;">
+                    <a href="#" class="nav-link" data-section="admin">Admin</a>
+                </li>
+                <li class="nav-item" id="loginNavItem">
+                    <a href="#" class="nav-link" data-section="login">Connexion</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="subject-card">
+            <h2>Bienvenue sur RealStudy</h2>
+            <p>Accédez à des ressources éducatives de qualité en mathématiques et en informatique. Notre plateforme offre des leçons interactives et des supports pédagogiques pour faciliter votre apprentissage.</p>
+            
+            <div class="material-grid" style="margin-top: 3rem;">
+                <div class="material-card">
+                    <i class="fas fa-square-root-alt" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Mathématiques</h3>
+                </div>
+                <div class="material-card">
+                    <i class="fas fa-code" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Informatique</h3>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Login Section -->
+        <section id="login" class="login-container subject-card hidden">
+            <h2>Connexion à votre compte</h2>
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="votre@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="login-btn">Se connecter</button>
+                <div id="errorContainer" class="error-message"></div>
+            </form>
+        </section>
+
+        <!-- Math Section -->
+        <section id="math" class="subject-card hidden">
+            <h2>Mathématiques</h2>
+            <p>Explorez nos ressources pédagogiques en mathématiques, organisées par niveau et catégorie.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="mathLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                </select>
+                
+                <select id="mathCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">Toutes catégories</option>
+                    <option value="Algèbre">Algèbre</option>
+                    <option value="Géométrie">Géométrie</option>
+                    <option value="Analyse">Analyse</option>
+                </select>
+            </div>
+            
+            <div id="mathLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu de mathématiques.</p>
+        </section>
+
+        <!-- Informatique Section -->
+        <section id="informatique" class="subject-card hidden">
+            <h2>Informatique</h2>
+            <p>Découvrez nos cours d'informatique organisés par niveau et domaine.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="csLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                </select>
+                
+                <select id="csCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">Tous domaines</option>
+                    <option value="Programmation">Programmation Python</option>
+                    <option value="Algorithmique">Algorithmique</option>
+                    <option value="Web">Thonny + QT</option>
+                </select>
+            </div>
+            
+            <div id="csLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu d'informatique.</p>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="subject-card hidden">
+            <h2>Tableau de bord Administrateur</h2>
+            <div id="adminContent" class="hidden">
+                <!-- Contenu admin -->
+            </div>
+            <p class="login-prompt">Accès réservé aux administrateurs.</p>
+        </section>
+    </main>
+
+    <!-- Fullscreen Lesson Container (hidden by default) -->
+    <div id="fullscreenLesson" class="lesson-fullscreen hidden">
+        <div class="lesson-fullscreen-content">
+            <div class="lesson-content-container">
+                <div id="lessonFullscreenContent" class="lesson-content"></div>
+            </div>
+        </div>
+        <button class="close-lesson-btn" id="closeLessonBtn">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-info">
+                <span><i class="fas fa-user-tie"></i> Créé par : Toujani Ahmed</span>
+                <span><i class="fas fa-phone-alt"></i> Contact : 99 845 762</span>
+                <span><i class="fas fa-envelope"></i> Email : ahmed.toujani@etudiant-isi.utm.tn</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyB9c2SiQiu1cTmo0RnMg1JIzk5Xjwc-0Kw",
+            authDomain: "realstudy-4.firebaseapp.com",
+            databaseURL: "https://realstudy-4-default-rtdb.firebaseio.com",
+            projectId: "realstudy-4",
+            storageBucket: "realstudy-4.appspot.com",
+            messagingSenderId: "123456789012",
+            appId: "1:123456789012:web:abc123def456xyz789"
+        };
+
+        // Initialisation Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+
+        // Références Realtime Database
+        const csLessonsRef = database.ref('csLessons');
+        const mathLessonsRef = database.ref('mathLessons');
+        const usersRef = database.ref('users');
+
+        // Système de navigation
+        function setupNavigation() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                    
+                    document.querySelectorAll('.nav-link').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                });
+            });
+        }
+
+        function showSection(sectionId) {
+            // Masquer toutes les sections
+            document.querySelectorAll('main > section').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Afficher uniquement la section demandée
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.classList.remove('hidden');
+            } else {
+                // Si la section demandée n'existe pas, afficher la section "home"
+                document.getElementById('home').classList.remove('hidden');
+            }
+        }
+
+        // Authentification
+        function loginUser(userData) {
+            const displayUsername = document.getElementById('displayUsername');
+            const userAvatar = document.getElementById('userAvatar');
+            const userInfo = document.getElementById('userInfo');
+            const roleBadge = document.getElementById('userRoleBadge');
+            
+            if (displayUsername) displayUsername.textContent = userData.name;
+            if (userAvatar) userAvatar.textContent = userData.name.charAt(0);
+            if (userInfo) userInfo.classList.remove('hidden');
+            
+            // Mettre à jour le badge de rôle
+            if (roleBadge) {
+                roleBadge.textContent = userData.role === 'teacher' ? 'Enseignant' : 
+                                      userData.role === 'admin' ? 'Admin' : 'Étudiant';
+                roleBadge.className = 'badge ' + userData.role;
+            }
+            
+            // Afficher le contenu approprié
+            document.querySelectorAll('.login-prompt').forEach(el => el.style.display = 'none');
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('loginNavItem').style.display = 'none';
+            
+            // Afficher le menu admin si nécessaire
+            if (userData.role === 'admin') {
+                document.getElementById('adminNavItem').style.display = 'block';
+            } else {
+                document.getElementById('adminNavItem').style.display = 'none';
+            }
+            
+            loadContent();
+            showSection('home');
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                // Reset UI
+                document.getElementById('userInfo').classList.add('hidden');
+                document.getElementById('loginNavItem').style.display = 'block';
+                document.querySelectorAll('.login-prompt').forEach(el => el.style.display = 'block');
+                showSection('login');
+            });
+        }
+
+        // Charger les leçons d'une matière spécifique
+        function loadLessons(subject, containerId) {
+            const lessonsContainer = document.getElementById(containerId);
+            if (!lessonsContainer) return;
+
+            lessonsContainer.innerHTML = '<p>Chargement des leçons...</p>';
+
+            const lessonsRef = database.ref(subject + 'Lessons');
+            lessonsRef.orderByChild('order').on('value', (snapshot) => {
+                lessonsContainer.innerHTML = '';
+                
+                if (!snapshot.exists()) {
+                    lessonsContainer.innerHTML = '<p>Aucune leçon disponible pour le moment.</p>';
+                    return;
+                }
+
+                snapshot.forEach((childSnapshot) => {
+                    const lesson = childSnapshot.val();
+                    const lessonId = childSnapshot.key;
+
+                    const lessonCard = document.createElement('div');
+                    lessonCard.className = 'material-card lesson';
+                    
+                    lessonCard.innerHTML = `
+                        <h3>${lesson.title || 'Sans titre'}</h3>
+                        <p>${lesson.description || 'Aucune description disponible'}</p>
+                        <div class="meta">
+                            <span>Niveau: ${lesson.level || 'Non spécifié'}</span>
+                            <span class="badge">${lesson.category || 'Général'}</span>
+                        </div>
+                        <button class="action-btn btn-primary view-lesson-btn" data-lesson-id="${lessonId}" data-subject="${subject}">
+                            Voir la leçon
+                        </button>
+                    `;
+
+                    lessonsContainer.appendChild(lessonCard);
+                });
+
+                // Ajouter les écouteurs d'événements pour les boutons "Voir la leçon"
+                document.querySelectorAll('.view-lesson-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const lessonId = this.getAttribute('data-lesson-id');
+                        const subject = this.getAttribute('data-subject');
+                        showFullscreenLesson(lessonId, subject);
+                    });
+                });
+            });
+        }
+
+        // Afficher une leçon en plein écran
+        function showFullscreenLesson(lessonId, subject) {
+            const lessonRef = database.ref(subject + 'Lessons/' + lessonId);
+            
+            lessonRef.once('value').then(snapshot => {
+                const lesson = snapshot.val();
+                if (!lesson) return;
+
+                const fullscreenContainer = document.getElementById('fullscreenLesson');
+                const contentElement = document.getElementById('lessonFullscreenContent');
+
+                if (lesson.htmllink) {
+                    contentElement.innerHTML = `<iframe src="${lesson.htmllink}" style="width:100%; height:100%; border:none;"></iframe>`;
+                } else if (lesson.content) {
+                    contentElement.innerHTML = lesson.content;
+                } else {
+                    contentElement.innerHTML = '<p>Aucun contenu disponible pour cette leçon</p>';
+                }
+
+                fullscreenContainer.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+
+        // Fermer la leçon en plein écran
+        function closeFullscreenLesson() {
+            document.getElementById('fullscreenLesson').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Configurer les filtres pour une matière
+        function setupFilters(subject) {
+            const levelFilter = document.getElementById(`${subject}LevelFilter`);
+            const categoryFilter = document.getElementById(`${subject}CategoryFilter`);
+            
+            if (levelFilter && categoryFilter) {
+                levelFilter.addEventListener('change', () => applyFilters(subject));
+                categoryFilter.addEventListener('change', () => applyFilters(subject));
+            }
+        }
+
+        // Appliquer les filtres
+        function applyFilters(subject) {
+            const levelFilter = document.getElementById(`${subject}LevelFilter`).value;
+            const categoryFilter = document.getElementById(`${subject}CategoryFilter`).value;
+            const containerId = `${subject}Lessons`;
+            
+            const lessonsContainer = document.getElementById(containerId);
+            if (!lessonsContainer) return;
+            
+            const lessonsRef = database.ref(subject + 'Lessons');
+            let query = lessonsRef.orderByChild('order');
+            
+            // Appliquer les filtres
+            query.on('value', (snapshot) => {
+                lessonsContainer.innerHTML = '';
+                
+                snapshot.forEach((childSnapshot) => {
+                    const lesson = childSnapshot.val();
+                    const lessonId = childSnapshot.key;
+                    
+                    // Vérifier si la leçon correspond aux filtres
+                    if ((!levelFilter || lesson.level === levelFilter) && 
+                        (!categoryFilter || lesson.category === categoryFilter)) {
+                        
+                        const lessonCard = document.createElement('div');
+                        lessonCard.className = 'material-card lesson';
+                        
+                        lessonCard.innerHTML = `
+                            <h3>${lesson.title || 'Sans titre'}</h3>
+                            <p>${lesson.description || 'Aucune description disponible'}</p>
+                            <div class="meta">
+                                <span>Niveau: ${lesson.level || 'Non spécifié'}</span>
+                                <span class="badge">${lesson.category || 'Général'}</span>
+                            </div>
+                            <button class="action-btn btn-primary view-lesson-btn" data-lesson-id="${lessonId}" data-subject="${subject}">
+                                Voir la leçon
+                            </button>
+                        `;
+
+                        lessonsContainer.appendChild(lessonCard);
+                    }
+                });
+
+                // Ajouter les écouteurs d'événements pour les boutons "Voir la leçon"
+                document.querySelectorAll('.view-lesson-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const lessonId = this.getAttribute('data-lesson-id');
+                        const subject = this.getAttribute('data-subject');
+                        showFullscreenLesson(lessonId, subject);
+                    });
+                });
+            });
+        }
+
+        // Charger le contenu
+        function loadContent() {
+            loadLessons('math', 'mathLessons');
+            loadLessons('cs', 'csLessons');
+            
+            // Configurer les filtres
+            setupFilters('math');
+            setupFilters('cs');
+        }
+
+        // Gestion des erreurs Firebase
+        function getFirebaseErrorMessage(error) {
+            const errorMap = {
+                'auth/invalid-email': 'Email invalide',
+                'auth/user-disabled': 'Compte désactivé',
+                'auth/user-not-found': 'Compte non trouvé',
+                'auth/wrong-password': 'Mot de passe incorrect',
+                'auth/email-already-in-use': 'Email déjà utilisé'
+            };
+            return errorMap[error.code] || error.message;
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            setupNavigation();
+            
+            // Gestion de l'authentification
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    usersRef.child(user.uid).once('value').then(snapshot => {
+                        const userData = snapshot.val();
+                        if (userData) {
+                            loginUser(userData);
+                        }
+                    });
+                } else {
+                    document.getElementById('userInfo').classList.add('hidden');
+                    document.getElementById('loginNavItem').style.display = 'block';
+                    document.querySelectorAll('.login-prompt').forEach(el => el.style.display = 'block');
+                    showSection('login');
+                }
+            });
+
+            // Formulaire de connexion
+            document.getElementById('authForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const errorContainer = document.getElementById('errorContainer');
+                
+                errorContainer.textContent = '';
+                errorContainer.style.display = 'none';
+                
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        return usersRef.child(userCredential.user.uid).once('value');
+                    })
+                    .then((snapshot) => {
+                        const userData = snapshot.val();
+                        if (!userData) {
+                            // Créer un nouvel utilisateur si nécessaire
+                            const role = email.endsWith('@realstudy.com') ? 'teacher' : 'student';
+                            return usersRef.child(auth.currentUser.uid).set({
+                                name: auth.currentUser.displayName || email.split('@')[0],
+                                email: email,
+                                role: role,
+                                uid: auth.currentUser.uid,
+                                createdAt: firebase.database.ServerValue.TIMESTAMP
+                            });
+                        }
+                        return userData;
+                    })
+                    .then((userData) => {
+                        if (userData && typeof userData === 'object') {
+                            loginUser(userData);
+                        } else {
+                            // Recharger les données utilisateur après création
+                            return usersRef.child(auth.currentUser.uid).once('value');
+                        }
+                    })
+                    .then((snapshot) => {
+                        if (snapshot) {
+                            loginUser(snapshot.val());
+                        }
+                    })
+                    .catch((error) => {
+                        errorContainer.style.display = 'block';
+                        errorContainer.textContent = getFirebaseErrorMessage(error);
+                    });
+            });
+
+            // Bouton de fermeture de la leçon en plein écran
+            document.getElementById('closeLessonBtn').addEventListener('click', closeFullscreenLesson);
+
+            // Charger la section appropriée au démarrage
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
