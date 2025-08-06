@@ -2,8 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RealStudy - Plateforme Éducative</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>RealStudy - Plateforme Éducative</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
@@ -161,6 +160,12 @@
             width: 100%;
             overflow-x: auto;
             padding: 0.5rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .nav-container::-webkit-scrollbar {
+            display: none;
         }
 
         .nav-menu {
@@ -659,13 +664,7 @@
             display: none !important;
         }
 
-        /* Adaptations responsive */
-        @media (max-width: 1600px) {
-            .lesson-content-container {
-                max-width: 1400px;
-            }
-        }
-
+        /* Responsive Design */
         @media (max-width: 1200px) {
             .lesson-fullscreen-content {
                 padding: 4rem 5rem;
@@ -681,6 +680,14 @@
         }
 
         @media (max-width: 992px) {
+            .subject-card {
+                padding: 2rem;
+            }
+            
+            .login-container {
+                padding: 2.5rem;
+            }
+            
             .lesson-fullscreen-content {
                 padding: 3rem 4rem;
             }
@@ -704,6 +711,29 @@
         }
 
         @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .user-info {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .subject-card {
+                padding: 1.5rem;
+            }
+            
+            .material-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .login-container {
+                padding: 2rem;
+            }
+            
             .lesson-fullscreen-content {
                 padding: 2.5rem 3rem;
             }
@@ -732,9 +762,55 @@
                 top: 20px;
                 right: 20px;
             }
+            
+            .footer-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            
+            .filters select {
+                width: 100% !important;
+                margin-left: 0 !important;
+                margin-bottom: 0.5rem;
+            }
         }
 
         @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .nav-link {
+                padding: 1rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            main {
+                padding: 2rem 0;
+            }
+            
+            .subject-card {
+                padding: 1.2rem;
+            }
+            
+            .subject-card h2 {
+                font-size: 1.6rem;
+            }
+            
+            .material-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .login-container {
+                padding: 1.5rem;
+            }
+            
+            .login-container h2 {
+                font-size: 1.5rem;
+            }
+            
             .lesson-fullscreen-content {
                 padding: 2rem;
             }
@@ -760,10 +836,138 @@
             .lesson-content ol {
                 padding-left: 2.5rem;
             }
+            
+            .close-lesson-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
         }
+
+        @media (max-width: 400px) {
+            .logo {
+                gap: 0.5rem;
+            }
+            
+            .logo-icon {
+                min-width: 38px;
+                height: 38px;
+                font-size: 1.4rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .nav-link {
+                padding: 0.8rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .user-avatar {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .logout-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .subject-card {
+                padding: 1rem;
+            }
+            
+            .subject-card h2 {
+                font-size: 1.4rem;
+            }
+            
+            .material-card {
+                padding: 1.2rem;
+            }
+            
+            .material-card h3 {
+                font-size: 1.1rem;
+            }
+            
+            .login-container {
+                padding: 1.2rem;
+            }
+            
+            .login-container h2 {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .form-control, .login-btn {
+                padding: 0.8rem;
+            }
+            
+            .lesson-fullscreen-content {
+                padding: 1.5rem;
+            }
+            
+            .lesson-content h1 {
+                font-size: 1.9rem !important;
+            }
+            
+            .lesson-content h2 {
+                font-size: 1.7rem !important;
+            }
+            
+            .lesson-content h3 {
+                font-size: 1.4rem !important;
+            }
+        }.burger {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .burger {
+        display: block;
+    }
+
+    .nav-container {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .nav-container.show {
+        display: flex;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-link {
+        padding: 1rem;
+        width: 100%;
+        border-bottom: 1px solid #ddd;
+    }
+}
+
     </style>
 </head>
 <body>
+    <!-- The rest of your HTML content remains exactly the same -->
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -772,6 +976,10 @@
                 </div>
                 <h1>RealStudy</h1>
             </div>
+            <button id="burgerMenu" class="burger " onclick="toggleNav()">
+                <i class="fas fa-bars"></i>
+            </button>
+            
             <div id="userInfo" class="user-info hidden">
                 <div class="user-avatar" id="userAvatar">U</div>
                 <span id="displayUsername"></span>
@@ -1648,5 +1856,11 @@
             showSection('home');
         });
     </script>
+    <script>
+        function toggleNav() {
+            document.querySelector('.nav-container').classList.toggle('show');
+        }
+    </script>
+    
 </body>
 </html>
