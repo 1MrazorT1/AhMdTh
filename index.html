@@ -789,11 +789,32 @@
                 <li class="nav-item">
                     <a href="#" class="nav-link active" data-section="home">Accueil</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="mathNavItem">
                     <a href="#" class="nav-link" data-section="math">Mathématiques</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="informatiqueNavItem">
                     <a href="#" class="nav-link" data-section="informatique">Informatique</a>
+                </li>
+                <li class="nav-item" id="espagnolNavItem">
+                    <a href="#" class="nav-link" data-section="espagnol">Espagnol</a>
+                </li>
+                <li class="nav-item" id="arabeNavItem">
+                    <a href="#" class="nav-link" data-section="arabe">Arabe</a>
+                </li>
+                <li class="nav-item" id="anglaisNavItem">
+                    <a href="#" class="nav-link" data-section="anglais">Anglais</a>
+                </li>
+                <li class="nav-item" id="francaisNavItem">
+                    <a href="#" class="nav-link" data-section="francais">Français</a>
+                </li>
+                <li class="nav-item" id="allemandNavItem">
+                    <a href="#" class="nav-link" data-section="allemand">Allemand</a>
+                </li>
+                <li class="nav-item" id="italienNavItem">
+                    <a href="#" class="nav-link" data-section="italien">Italien</a>
+                </li>
+                <li class="nav-item" id="svtNavItem">
+                    <a href="#" class="nav-link" data-section="svt">SVT</a>
                 </li>
                 <li class="nav-item" id="adminNavItem" style="display: none;">
                     <a href="#" class="nav-link" data-section="admin">Admin</a>
@@ -809,7 +830,7 @@
         <!-- Home Section -->
         <section id="home" class="subject-card">
             <h2>Bienvenue sur RealStudy</h2>
-            <p>Accédez à des ressources éducatives de qualité en mathématiques et en informatique. Notre plateforme offre des leçons interactives et des supports pédagogiques pour faciliter votre apprentissage.</p>
+            <p>Accédez à des ressources éducatives de qualité en mathématiques, informatique, langues et sciences. Notre plateforme offre des leçons interactives et des supports pédagogiques pour faciliter votre apprentissage.</p>
             
             <div class="material-grid" style="margin-top: 3rem;">
                 <div class="material-card">
@@ -819,6 +840,14 @@
                 <div class="material-card">
                     <i class="fas fa-code" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
                     <h3>Informatique</h3>
+                </div>
+                <div class="material-card">
+                    <i class="fas fa-language" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Langues</h3>
+                </div>
+                <div class="material-card">
+                    <i class="fas fa-flask" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <h3>Sciences</h3>
                 </div>
             </div>
         </section>
@@ -855,9 +884,11 @@
                 
                 <select id="mathCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
                     <option value="">Toutes catégories</option>
-                    <option value="Algèbre">Algèbre</option>
-                    <option value="Géométrie">Géométrie</option>
-                    <option value="Analyse">Analyse</option>
+                    <option value="Algèbre">Analyse</option>
+                    <option value="Géométrie">Complexe</option>
+                    <option value="Analyse">Proba/Stat</option>
+                    <option value="Analyse">Autre</option>
+
                 </select>
             </div>
             
@@ -882,7 +913,6 @@
                 
                 <select id="csCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
                     <option value="">Tous domaines</option>
-                    <option value="Programmation">Programmation Python</option>
                     <option value="Algorithmique">Algorithmique</option>
                     <option value="Web">Thonny + QT</option>
                 </select>
@@ -892,6 +922,188 @@
                 <!-- Leçons chargées dynamiquement -->
             </div>
             <p class="login-prompt">Veuillez vous connecter pour accéder au contenu d'informatique.</p>
+        </section>
+
+        <!-- Espagnol Section -->
+        <section id="espagnol" class="subject-card hidden">
+            <h2>Espagnol</h2>
+            <p>Découvrez nos cours d'espagnol organisés par niveau et thème.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="spanishLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">3eme</option>
+                    <option value="Intermédiaire">Bac</option>
+                    <option value="Avancé">Personnel</option>
+                </select>
+                
+                <select id="spanishCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">Live/Cours</option>
+                    <option value="Grammaire">Live</option>
+                    <option value="Vocabulaire">Cours</option>
+                </select>
+            </div>
+            
+            <div id="spanishLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu d'espagnol.</p>
+        </section>
+
+        <!-- Arabe Section -->
+        <section id="arabe" class="subject-card hidden">
+            <h2>Arabe</h2>
+            <p>Découvrez nos cours d'arabe organisés par niveau et thème.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="arabicLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                </select>
+                
+                <select id="arabicCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">LIVE/COURS</option>
+                    <option value="Grammaire">Live/option>
+                    <option value="Vocabulaire">Cours</option>
+                </select>
+            </div>
+            
+            <div id="arabicLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu d'arabe.</p>
+        </section>
+
+        <!-- Anglais Section -->
+        <section id="anglais" class="subject-card hidden">
+            <h2>Anglais</h2>
+            <p>Découvrez nos cours d'anglais organisés par niveau et thème.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="englishLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                </select>
+                
+                <select id="englishCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">LIVE/Cours</option>
+                    <option value="Grammaire">Live</option>
+                    <option value="Vocabulaire">Cours</option>
+                </select>
+            </div>
+            
+            <div id="englishLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu d'anglais.</p>
+        </section>
+
+        <!-- Français Section -->
+        <section id="francais" class="subject-card hidden">
+            <h2>Français</h2>
+            <p>Découvrez nos cours de français organisés par niveau et thème.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="frenchLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                </select>
+                
+                <select id="frenchCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">Live/Cours</option>
+                    <option value="Grammaire">Live</option>
+                    <option value="Orthographe">Cours</option>
+                </select>
+            </div>
+            
+            <div id="frenchLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu de français.</p>
+        </section>
+
+        <!-- Allemand Section -->
+        <section id="allemand" class="subject-card hidden">
+            <h2>Allemand</h2>
+            <p>Découvrez nos cours d'allemand organisés par niveau et thème.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="germanLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">3eme</option>
+                    <option value="Intermédiaire">Bac</option>
+                    <option value="Avancé">Personnel</option>
+                </select>
+                
+                <select id="germanCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">LIVE/COURS</option>
+                    <option value="Grammaire">LIVE</option>
+                    <option value="Vocabulaire">Cours</option>
+                </select>
+            </div>
+            
+            <div id="germanLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu d'allemand.</p>
+        </section>
+
+        <!-- Italien Section -->
+        <section id="italien" class="subject-card hidden">
+            <h2>Italien</h2>
+            <p>Découvrez nos cours d'italien organisés par niveau et thème.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="italianLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">3eme</option>
+                    <option value="Intermédiaire">Bac</option>
+                    <option value="Avancé">Personnel</option>
+                </select>
+                
+                <select id="italianCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">LIVE/COURS</option>
+                    <option value="Grammaire">LIVE</option>
+                    <option value="Vocabulaire">Cours</option>
+                </select>
+            </div>
+            
+            <div id="italianLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu d'italien.</p>
+        </section>
+
+        <!-- SVT Section -->
+        <section id="svt" class="subject-card hidden">
+            <h2>Sciences de la Vie et de la Terre</h2>
+            <p>Découvrez nos cours de SVT organisés par niveau et thème.</p>
+            
+            <div class="filters" style="margin: 1.5rem 0;">
+                <select id="svtLevelFilter" class="form-control" style="width: auto; display: inline-block;">
+                    <option value="">Tous les niveaux</option>
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                </select>
+                
+                <select id="svtCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
+                    <option value="">LIVE/COURS</option>
+                    <option value="LIVE">LIVE</option>
+                    <option value="Cours">Cours</option>
+                </select>
+            </div>
+            
+            <div id="svtLessons" class="material-grid">
+                <!-- Leçons chargées dynamiquement -->
+            </div>
+            <p class="login-prompt">Veuillez vous connecter pour accéder au contenu de SVT.</p>
         </section>
 
         <!-- Admin Section -->
@@ -921,7 +1133,7 @@
             <div class="footer-info">
                 <span><i class="fas fa-user-tie"></i> Créé par : Toujani Ahmed</span>
                 <span><i class="fas fa-phone-alt"></i> Contact : 99 845 762</span>
-                <span><i class="fas fa-envelope"></i> Email : ahmed.toujani@etudiant-isi.utm.tn</span>
+                <span><i class="fas fa-envelope"></i>   Email : ahmed.toujani@etudiant-isi.utm.tn</span>
             </div>
         </div>
     </footer>
@@ -946,6 +1158,13 @@
         // Références Realtime Database
         const csLessonsRef = database.ref('csLessons');
         const mathLessonsRef = database.ref('mathLessons');
+        const spanishLessonsRef = database.ref('spanishLessons');
+        const arabicLessonsRef = database.ref('arabicLessons');
+        const englishLessonsRef = database.ref('englishLessons');
+        const frenchLessonsRef = database.ref('frenchLessons');
+        const germanLessonsRef = database.ref('germanLessons');
+        const italianLessonsRef = database.ref('italianLessons');
+        const svtLessonsRef = database.ref('svtLessons');
         const usersRef = database.ref('users');
 
         // Système de navigation
@@ -993,9 +1212,13 @@
             
             // Mettre à jour le badge de rôle
             if (roleBadge) {
-                roleBadge.textContent = userData.role === 'teacher' ? 'Enseignant' : 
-                                      userData.role === 'admin' ? 'Admin' : 'Étudiant';
-                roleBadge.className = 'badge ' + userData.role;
+                if (Array.isArray(userData.role)) {
+                    roleBadge.textContent = 'Étudiant (' + userData.role.join(', ') + ')';
+                } else {
+                    roleBadge.textContent = userData.role === 'teacher' ? 'Enseignant' : 
+                                          userData.role === 'admin' ? 'Admin' : 'Étudiant';
+                }
+                roleBadge.className = 'badge ' + (Array.isArray(userData.role) ? 'student' : userData.role);
             }
             
             // Afficher le contenu approprié
@@ -1010,8 +1233,96 @@
                 document.getElementById('adminNavItem').style.display = 'none';
             }
             
+            // Gérer l'accès aux matières en fonction du rôle
+            updateSubjectAccess(userData.role);
+            
             loadContent();
             showSection('home');
+        }
+
+        // Mettre à jour l'accès aux matières en fonction du rôle
+        function updateSubjectAccess(userRole) {
+            // Masquer toutes les matières d'abord
+            document.getElementById('mathNavItem').style.display = 'none';
+            document.getElementById('informatiqueNavItem').style.display = 'none';
+            document.getElementById('espagnolNavItem').style.display = 'none';
+            document.getElementById('arabeNavItem').style.display = 'none';
+            document.getElementById('anglaisNavItem').style.display = 'none';
+            document.getElementById('francaisNavItem').style.display = 'none';
+            document.getElementById('allemandNavItem').style.display = 'none';
+            document.getElementById('italienNavItem').style.display = 'none';
+            document.getElementById('svtNavItem').style.display = 'none';
+            
+            // Admin et enseignant ont accès à tout
+            if (userRole === 'admin' || userRole === 'teacher') {
+                document.getElementById('mathNavItem').style.display = 'block';
+                document.getElementById('informatiqueNavItem').style.display = 'block';
+                document.getElementById('espagnolNavItem').style.display = 'block';
+                document.getElementById('arabeNavItem').style.display = 'block';
+                document.getElementById('anglaisNavItem').style.display = 'block';
+                document.getElementById('francaisNavItem').style.display = 'block';
+                document.getElementById('allemandNavItem').style.display = 'block';
+                document.getElementById('italienNavItem').style.display = 'block';
+                document.getElementById('svtNavItem').style.display = 'block';
+            } 
+            // Étudiant avec plusieurs matières
+            else if (Array.isArray(userRole)) {
+                if (userRole.includes('math')) {
+                    document.getElementById('mathNavItem').style.display = 'block';
+                }
+                if (userRole.includes('informatique')) {
+                    document.getElementById('informatiqueNavItem').style.display = 'block';
+                }
+                if (userRole.includes('espagnol')) {
+                    document.getElementById('espagnolNavItem').style.display = 'block';
+                }
+                if (userRole.includes('arabe')) {
+                    document.getElementById('arabeNavItem').style.display = 'block';
+                }
+                if (userRole.includes('anglais')) {
+                    document.getElementById('anglaisNavItem').style.display = 'block';
+                }
+                if (userRole.includes('francais')) {
+                    document.getElementById('francaisNavItem').style.display = 'block';
+                }
+                if (userRole.includes('allemand')) {
+                    document.getElementById('allemandNavItem').style.display = 'block';
+                }
+                if (userRole.includes('italien')) {
+                    document.getElementById('italienNavItem').style.display = 'block';
+                }
+                if (userRole.includes('svt')) {
+                    document.getElementById('svtNavItem').style.display = 'block';
+                }
+            }
+            // Étudiant avec une seule matière (ancien système)
+            else if (userRole === 'math') {
+                document.getElementById('mathNavItem').style.display = 'block';
+            }
+            else if (userRole === 'informatique') {
+                document.getElementById('informatiqueNavItem').style.display = 'block';
+            }
+            else if (userRole === 'espagnol') {
+                document.getElementById('espagnolNavItem').style.display = 'block';
+            }
+            else if (userRole === 'arabe') {
+                document.getElementById('arabeNavItem').style.display = 'block';
+            }
+            else if (userRole === 'anglais') {
+                document.getElementById('anglaisNavItem').style.display = 'block';
+            }
+            else if (userRole === 'francais') {
+                document.getElementById('francaisNavItem').style.display = 'block';
+            }
+            else if (userRole === 'allemand') {
+                document.getElementById('allemandNavItem').style.display = 'block';
+            }
+            else if (userRole === 'italien') {
+                document.getElementById('italienNavItem').style.display = 'block';
+            }
+            else if (userRole === 'svt') {
+                document.getElementById('svtNavItem').style.display = 'block';
+            }
         }
 
         function logout() {
@@ -1020,6 +1331,18 @@
                 document.getElementById('userInfo').classList.add('hidden');
                 document.getElementById('loginNavItem').style.display = 'block';
                 document.querySelectorAll('.login-prompt').forEach(el => el.style.display = 'block');
+                
+                // Réactiver toutes les matières pour la navigation non connectée
+                document.getElementById('mathNavItem').style.display = 'block';
+                document.getElementById('informatiqueNavItem').style.display = 'block';
+                document.getElementById('espagnolNavItem').style.display = 'block';
+                document.getElementById('arabeNavItem').style.display = 'block';
+                document.getElementById('anglaisNavItem').style.display = 'block';
+                document.getElementById('francaisNavItem').style.display = 'block';
+                document.getElementById('allemandNavItem').style.display = 'block';
+                document.getElementById('italienNavItem').style.display = 'block';
+                document.getElementById('svtNavItem').style.display = 'block';
+                
                 showSection('login');
             });
         }
@@ -1172,22 +1495,39 @@
         function loadContent() {
             loadLessons('math', 'mathLessons');
             loadLessons('cs', 'csLessons');
+            loadLessons('spanish', 'spanishLessons');
+            loadLessons('arabic', 'arabicLessons');
+            loadLessons('english', 'englishLessons');
+            loadLessons('french', 'frenchLessons');
+            loadLessons('german', 'germanLessons');
+            loadLessons('italian', 'italianLessons');
+            loadLessons('svt', 'svtLessons');
             
             // Configurer les filtres
             setupFilters('math');
             setupFilters('cs');
+            setupFilters('spanish');
+            setupFilters('arabic');
+            setupFilters('english');
+            setupFilters('french');
+            setupFilters('german');
+            setupFilters('italian');
+            setupFilters('svt');
         }
 
         // Gestion des erreurs Firebase
         function getFirebaseErrorMessage(error) {
             const errorMap = {
-                'auth/invalid-email': 'Email invalide',
-                'auth/user-disabled': 'Compte désactivé',
-                'auth/user-not-found': 'Compte non trouvé',
+                'auth/invalid-email': 'Adresse email invalide',
+                'auth/user-disabled': 'Votre compte a été désactivé',
+                'auth/user-not-found': 'Aucun compte trouvé avec cette adresse email',
                 'auth/wrong-password': 'Mot de passe incorrect',
-                'auth/email-already-in-use': 'Email déjà utilisé'
+                'auth/invalid-login-credentials': 'Email ou mot de passe incorrect', // Updated message
+                'auth/email-already-in-use': 'Cette adresse email est déjà utilisée',
+                'auth/weak-password': 'Le mot de passe doit contenir au moins 6 caractères',
+                'auth/too-many-requests': 'Trop de tentatives de connexion. Veuillez réessayer plus tard.'
             };
-            return errorMap[error.code] || error.message;
+            return errorMap[error.code] || "Une erreur s'est produite. Veuillez réessayer.";
         }
 
         // Initialisation
@@ -1230,7 +1570,48 @@
                         const userData = snapshot.val();
                         if (!userData) {
                             // Créer un nouvel utilisateur si nécessaire
-                            const role = email.endsWith('@realstudy.com') ? 'teacher' : 'student';
+                            let role = []; // Par défaut tableau vide
+                            
+                            if (email.endsWith('@realstudy.com')) {
+                                role = 'teacher'; // Enseignant (string)
+                            } else if (email.endsWith('@admin.realstudy.com')) {
+                                role = 'admin'; // Admin (string)
+                            } else {
+                                // Étudiant peut avoir plusieurs matières
+                                if (email.includes('math')) {
+                                    role.push('math');
+                                }
+                                if (email.includes('info')) {
+                                    role.push('informatique');
+                                }
+                                if (email.includes('esp')) {
+                                    role.push('espagnol');
+                                }
+                                if (email.includes('arabe')) {
+                                    role.push('arabe');
+                                }
+                                if (email.includes('anglais')) {
+                                    role.push('anglais');
+                                }
+                                if (email.includes('francais')) {
+                                    role.push('francais');
+                                }
+                                if (email.includes('allemand')) {
+                                    role.push('allemand');
+                                }
+                                if (email.includes('italien')) {
+                                    role.push('italien');
+                                }
+                                if (email.includes('svt')) {
+                                    role.push('svt');
+                                }
+                                
+                                // Si aucune matière trouvée, définir comme étudiant générique
+                                if (role.length === 0) {
+                                    role = 'student';
+                                }
+                            }
+                            
                             return usersRef.child(auth.currentUser.uid).set({
                                 name: auth.currentUser.displayName || email.split('@')[0],
                                 email: email,
