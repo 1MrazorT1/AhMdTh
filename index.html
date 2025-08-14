@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>RealStudy - Plateforme Éducative</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RealStudy - Plateforme Éducative</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
@@ -927,47 +928,47 @@
             .lesson-content h3 {
                 font-size: 1.4rem !important;
             }
-        }.burger {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.6rem;
-    cursor: pointer;
-    display: none;
-}
+        }
 
-@media (max-width: 768px) {
-    .burger {
-        display: block;
-    }
+        .burger {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.6rem;
+            cursor: pointer;
+            display: none;
+        }
 
-    .nav-container {
-        display: none;
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-    }
+        @media (max-width: 768px) {
+            .burger {
+                display: block;
+            }
 
-    .nav-container.show {
-        display: flex;
-    }
+            .nav-container {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
 
-    .nav-menu {
-        flex-direction: column;
-        width: 100%;
-    }
+            .nav-container.show {
+                display: flex;
+            }
 
-    .nav-link {
-        padding: 1rem;
-        width: 100%;
-        border-bottom: 1px solid #ddd;
-    }
-}
+            .nav-menu {
+                flex-direction: column;
+                width: 100%;
+            }
 
+            .nav-link {
+                padding: 1rem;
+                width: 100%;
+                border-bottom: 1px solid #ddd;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- The rest of your HTML content remains exactly the same -->
     <header>
         <div class="container header-container">
             <div class="logo">
@@ -976,7 +977,7 @@
                 </div>
                 <h1>RealStudy</h1>
             </div>
-            <button id="burgerMenu" class="burger " onclick="toggleNav()">
+            <button id="burgerMenu" class="burger" onclick="toggleNav()">
                 <i class="fas fa-bars"></i>
             </button>
             
@@ -1023,6 +1024,9 @@
                 </li>
                 <li class="nav-item" id="svtNavItem">
                     <a href="#" class="nav-link" data-section="svt">SVT</a>
+                </li>
+                <li class="nav-item" id="printNavItem">
+                    <a href="#" class="nav-link" data-section="print">Print</a>
                 </li>
                 <li class="nav-item" id="adminNavItem" style="display: none;">
                     <a href="#" class="nav-link" data-section="admin">Admin</a>
@@ -1092,11 +1096,10 @@
                 
                 <select id="mathCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
                     <option value="">Toutes catégories</option>
-                    <option value="Algèbre">Analyse</option>
-                    <option value="Géométrie">Complexe</option>
-                    <option value="Analyse">Proba/Stat</option>
-                    <option value="Analyse">Autre</option>
-
+                    <option value="Analyse">Analyse</option>
+                    <option value="Complexe">Complexe</option>
+                    <option value="Proba/Stat">Proba/Stat</option>
+                    <option value="Autre">Autre</option>
                 </select>
             </div>
             
@@ -1173,7 +1176,7 @@
                 
                 <select id="arabicCategoryFilter" class="form-control" style="width: auto; display: inline-block; margin-left: 1rem;">
                     <option value="">LIVE/COURS</option>
-                    <option value="Grammaire">Live/option>
+                    <option value="Grammaire">Live</option>
                     <option value="Vocabulaire">Cours</option>
                 </select>
             </div>
@@ -1314,6 +1317,13 @@
             <p class="login-prompt">Veuillez vous connecter pour accéder au contenu de SVT.</p>
         </section>
 
+        <!-- Print Section -->
+        <section id="print" class="subject-card hidden">
+            <h2>Print</h2>
+            <p>Accédez au formulaire pour imprimer votre document </p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSebAUpejcKQISgCkJPtpRS7t1Y8M3ItHu1V0tOHtR5KEbgWqg/viewform?usp=dialog" id="googleFormLink" class="action-btn btn-primary" target="_blank">Accéder au formulaire</a>
+        </section>
+
         <!-- Admin Section -->
         <section id="admin" class="subject-card hidden">
             <h2>Tableau de bord Administrateur</h2>
@@ -1341,7 +1351,7 @@
             <div class="footer-info">
                 <span><i class="fas fa-user-tie"></i> Créé par : Toujani Ahmed</span>
                 <span><i class="fas fa-phone-alt"></i> Contact : 99 845 762</span>
-                <span><i class="fas fa-envelope"></i>   Email : ahmed.toujani@etudiant-isi.utm.tn</span>
+                <span><i class="fas fa-envelope"></i> Email : ahmed.toujani@etudiant-isi.utm.tn</span>
             </div>
         </div>
     </footer>
@@ -1460,6 +1470,7 @@
             document.getElementById('allemandNavItem').style.display = 'none';
             document.getElementById('italienNavItem').style.display = 'none';
             document.getElementById('svtNavItem').style.display = 'none';
+            document.getElementById('printNavItem').style.display = 'none';
             
             // Admin et enseignant ont accès à tout
             if (userRole === 'admin' || userRole === 'teacher') {
@@ -1472,6 +1483,7 @@
                 document.getElementById('allemandNavItem').style.display = 'block';
                 document.getElementById('italienNavItem').style.display = 'block';
                 document.getElementById('svtNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             } 
             // Étudiant avec plusieurs matières
             else if (Array.isArray(userRole)) {
@@ -1502,34 +1514,44 @@
                 if (userRole.includes('svt')) {
                     document.getElementById('svtNavItem').style.display = 'block';
                 }
+                document.getElementById('printNavItem').style.display = 'block';
             }
             // Étudiant avec une seule matière (ancien système)
             else if (userRole === 'math') {
                 document.getElementById('mathNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'informatique') {
                 document.getElementById('informatiqueNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'espagnol') {
                 document.getElementById('espagnolNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'arabe') {
                 document.getElementById('arabeNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'anglais') {
                 document.getElementById('anglaisNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'francais') {
                 document.getElementById('francaisNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'allemand') {
                 document.getElementById('allemandNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'italien') {
                 document.getElementById('italienNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
             else if (userRole === 'svt') {
                 document.getElementById('svtNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
             }
         }
 
@@ -1550,6 +1572,7 @@
                 document.getElementById('allemandNavItem').style.display = 'block';
                 document.getElementById('italienNavItem').style.display = 'block';
                 document.getElementById('svtNavItem').style.display = 'block';
+                document.getElementById('printNavItem').style.display = 'block';
                 
                 showSection('login');
             });
@@ -1579,7 +1602,7 @@
                     lessonCard.className = 'material-card lesson';
                     
                     lessonCard.innerHTML = `
-                        <h3>${lesson.title || 'Sans titre'}</h3>
+                        <h3>${lesson.titre || ''}</h3>
                         <p>${lesson.description || 'Aucune description disponible'}</p>
                         <div class="meta">
                             <span>Niveau: ${lesson.level || 'Non spécifié'}</span>
@@ -1606,27 +1629,78 @@
 
         // Afficher une leçon en plein écran
         function showFullscreenLesson(lessonId, subject) {
-            const lessonRef = database.ref(subject + 'Lessons/' + lessonId);
-            
-            lessonRef.once('value').then(snapshot => {
-                const lesson = snapshot.val();
-                if (!lesson) return;
+    const lessonRef = database.ref(subject + 'Lessons/' + lessonId);
+    const fullscreenContainer = document.getElementById('fullscreenLesson');
+    const contentElement = document.getElementById('lessonFullscreenContent');
 
-                const fullscreenContainer = document.getElementById('fullscreenLesson');
-                const contentElement = document.getElementById('lessonFullscreenContent');
+    // Afficher un loader immédiatement
+    contentElement.innerHTML = `
+        <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: var(--primary);"></i>
+            <p>Chargement de la leçon...</p>
+        </div>
+    `;
+    fullscreenContainer.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 
-                if (lesson.htmllink) {
-                    contentElement.innerHTML = `<iframe src="${lesson.htmllink}" style="width:100%; height:100%; border:none;"></iframe>`;
-                } else if (lesson.content) {
-                    contentElement.innerHTML = lesson.content;
-                } else {
-                    contentElement.innerHTML = '<p>Aucun contenu disponible pour cette leçon</p>';
-                }
-
-                fullscreenContainer.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
+    lessonRef.once('value').then(snapshot => {
+        const lesson = snapshot.val();
+        if (!lesson) {
+            contentElement.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Leçon non trouvée</p>
+                </div>
+            `;
+            return;
         }
+
+        if (lesson.pdfLink) {
+    // Créer un bouton pour ouvrir le PDF
+    contentElement.innerHTML = `
+        <div style="text-align: center; padding: 2rem;">
+            <i class="fas fa-file-pdf" style="font-size: 4rem; color: var(--danger); margin-bottom: 1rem;"></i>
+            <h3>${lesson.titre || 'Document PDF'}</h3>
+            
+            ${lesson.description ? `<p style="margin: 1rem 0; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">${lesson.description}</p>` : ''}
+            
+            ${lesson.content ? `<div style="margin: 1.5rem 0; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; padding: 1rem; background: var(--light-gray); border-radius: 8px;">
+                ${lesson.content}
+            </div>` : ''}
+            
+            <a href="${lesson.pdfLink}" target="_blank" class="action-btn btn-primary" style="margin-top: 1rem;">
+                <i class="fas fa-external-link-alt"></i> accéder au Contenu 
+            </a>
+            <button onclick="closeFullscreenLesson()" class="action-btn" style="margin-top: 1rem; background: var(--light-gray);">
+                <i class="fas fa-times"></i> Fermer
+            </button>
+        </div>
+    `;
+} else {
+            contentElement.innerHTML = `
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>Aucun PDF disponible pour cette leçon</p>
+                    <button onclick="closeFullscreenLesson()" class="action-btn" style="margin-top: 1rem;">
+                        <i class="fas fa-arrow-left"></i> Retour
+                    </button>
+                </div>
+            `;
+        }
+    }).catch(error => {
+        console.error("Erreur:", error);
+        contentElement.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Erreur de chargement</p>
+                <button onclick="closeFullscreenLesson()" class="action-btn" style="margin-top: 1rem;">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </button>
+            </div>
+        `;
+    });
+}
+
 
         // Fermer la leçon en plein écran
         function closeFullscreenLesson() {
@@ -1673,7 +1747,7 @@
                         lessonCard.className = 'material-card lesson';
                         
                         lessonCard.innerHTML = `
-                            <h3>${lesson.title || 'Sans titre'}</h3>
+                            <h3>${lesson.titre || 'Sans titre'}</h3>
                             <p>${lesson.description || 'Aucune description disponible'}</p>
                             <div class="meta">
                                 <span>Niveau: ${lesson.level || 'Non spécifié'}</span>
@@ -1730,7 +1804,7 @@
                 'auth/user-disabled': 'Votre compte a été désactivé',
                 'auth/user-not-found': 'Aucun compte trouvé avec cette adresse email',
                 'auth/wrong-password': 'Mot de passe incorrect',
-                'auth/invalid-login-credentials': 'Email ou mot de passe incorrect', // Updated message
+                'auth/invalid-login-credentials': 'Email ou mot de passe incorrect',
                 'auth/email-already-in-use': 'Cette adresse email est déjà utilisée',
                 'auth/weak-password': 'Le mot de passe doit contenir au moins 6 caractères',
                 'auth/too-many-requests': 'Trop de tentatives de connexion. Veuillez réessayer plus tard.'
@@ -1855,12 +1929,14 @@
             // Charger la section appropriée au démarrage
             showSection('home');
         });
-    </script>
-    <script>
+
         function toggleNav() {
             document.querySelector('.nav-container').classList.toggle('show');
         }
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) document.querySelector('.nav-container').classList.remove('show');
+        });
     </script>
-    
 </body>
 </html>
